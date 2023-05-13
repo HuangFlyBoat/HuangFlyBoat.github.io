@@ -1,23 +1,27 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
 
+
 export default defineUserConfig({
   base: "/",
 
   locales: {
     "/": {
       lang: "en-US",
-      title: "Blog Demo",
+      title: "hcx Blog",
       description: "A blog demo for vuepress-theme-hope",
     },
     "/zh/": {
       lang: "zh-CN",
-      title: "博客演示",
-      description: "vuepress-theme-hope 的博客演示",
+      title: "hcx的博客",
+      description: "黄先生的博客妙妙屋",
     },
   },
 
   theme,
+
+
+
 
   // Enable it with pwa
   // shouldPrefetch: false,
