@@ -13,9 +13,9 @@ export default hopeTheme({
 
   iconAssets: "iconfont",
 
-  logo: "/avatar.png",
+  logo: "/boat.png",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "HuangFlyBoat/HuangFlyBoat.github.io",
 
   docsDir: "docs",
 
@@ -68,6 +68,7 @@ export default hopeTheme({
       displayFooter: true,
 
       blog: {
+        avatar:'/boat.gif',
         description: "一个前端开发者",
         intro: "/zh/intro.html",
       },

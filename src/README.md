@@ -3,7 +3,7 @@ home: true
 layout: BlogHome
 icon: home
 title: Blog Home
-heroImage: /logo.svg
+heroImage: /boat.png
 bgImage: /background.png
 heroText: The name of your blog
 tagline: You can put your slogan here

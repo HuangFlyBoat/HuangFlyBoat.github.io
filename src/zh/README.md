@@ -3,9 +3,9 @@ home: true
 layout: BlogHome
 icon: home
 title: flyboat
-heroImage: /avatar.png
+heroImage: /boat.png
 heroText: 飞船的妙妙屋
-heroFullScreen: true
+heroFullScreen: false
 bgImage: /background.png
 tagline: 少年~继续努力呀
 projects:
