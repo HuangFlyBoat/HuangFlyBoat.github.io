@@ -2,12 +2,12 @@
 home: true
 layout: BlogHome
 icon: home
-title: Blog Home
+title: Home
 heroImage: /boat.png
-bgImage: /background.png
-heroText: The name of your blog
-tagline: You can put your slogan here
-heroFullScreen: true
+bgImage: /background.jpg
+heroText: flyboat~
+tagline: fly fly fly
+heroFullScreen: false
 projects:
   - icon: project
     name: project name

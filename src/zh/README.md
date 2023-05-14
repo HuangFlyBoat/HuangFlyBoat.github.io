@@ -2,11 +2,11 @@
 home: true
 layout: BlogHome
 icon: home
-title: flyboat
+title: 主页
 heroImage: /boat.png
 heroText: 飞船的妙妙屋
 heroFullScreen: false
-bgImage: /background.png
+bgImage: /background.jpg
 tagline: 少年~继续努力呀
 projects:
   - icon: project
@@ -34,7 +34,7 @@ projects:
     desc: 伙伴详细介绍
     link: https://你的伙伴链接
 
-  - icon: /logo.svg
+  - icon: /boat.png
     name: 自定义项目
     desc: 自定义详细介绍
     link: https://你的自定义链接

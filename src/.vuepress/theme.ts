@@ -44,6 +44,7 @@ export default hopeTheme({
       displayFooter: true,
 
       blog: {
+        avatar:'/boat.gif',
         description: "A FrontEnd programmer",
         intro: "/intro.html",
       },
