@@ -2,7 +2,7 @@
 # 这是文章的标题
 title: 正则表达式
 # You can customize cover image
-cover: /assets/images/CrushingZone/regular_expression.png
+cover: /assets/images/CrushingZone/regular_expression.jpg
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
