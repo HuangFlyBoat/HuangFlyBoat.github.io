@@ -2,7 +2,7 @@
 # 这是文章的标题
 title: 正则表达式
 # You can customize cover image
-cover: /assets/images/cover1.jpg
+cover: /assets/images/CrushingZone/regular_expression.png
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -18,11 +18,11 @@ category:
 tag:
   - 小白向
 # 此页面会在文章列表置顶
-sticky: true
+sticky: false
 # 此页面会出现在文章收藏中
 star: true
 # 你可以自定义页脚
-footer: fly fly fly ~
+footer: 夏天刚刚开始呢
 
 ---
 

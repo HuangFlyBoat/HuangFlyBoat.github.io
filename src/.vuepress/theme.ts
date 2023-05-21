@@ -17,7 +17,7 @@ export default hopeTheme({
 
   repo: "HuangFlyBoat/HuangFlyBoat.github.io",
 
-  docsDir: "docs",
+  docsDir: "src",
 
   blog: {
     medias: {
