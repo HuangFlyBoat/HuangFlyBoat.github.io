@@ -10,7 +10,7 @@ order: 1
 # 设置作者
 author: HCX
 # 设置写作时间
-date: 2023-3-20
+date: 2023-05-28
 # 一个页面可以有多个分类
 category:
   - dom
@@ -108,9 +108,207 @@ const height = rect.height;
 
 > https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 
-一种新的浏览器API，它可以异步观察目标元素与其祖先元素或顶级文档视窗之间的交叉状态。使用该API可以轻松实现懒加载图片，只需要监听目标元素与视窗的交叉状态即可。
+一种新的浏览器API，它可以异步观察目标元素与其祖先元素或顶级文档视窗之间的交叉状态。
+使用该API可以轻松实现懒加载图片，只需要监听目标元素与视窗的交叉状态即可。
+
+### 4.1 基本使用
+
+**调用 `IntersectionObserver(cb,{})`构造函数返回一个新的 `IntersectionObserver` 对象**
+
+该构造函数接收两个参数，分别是满足条件时触发的回调函数CB和配置项对象
+
+回调函数的第一个参数为 entries ，是一个数组包含了所有被观察元素的观察信息。每个观察信息都是一个`IntersectionObserverEntry`对象，
+其中包含了目标元素的信息以及与视窗的交叉信息。 entries 内的元素是通过方法 `observe` 手动添加的。如下：
+
+```js
+const intersectionObserver = new IntersectionObserver((entries) => {
+// 如果 intersectionRatio 为 0，则目标在视野外，
+// 我们不需要做任何事情。
+if (entries[0].intersectionRatio <= 0) return;
+
+loadItems(10);
+console.log('Loaded new items');
+});
+// 开始监听
+intersectionObserver.observe(document.querySelector('.scrollerFooter'));
+
+```
 
 
+:::info
+对于每个被观察的元素，都会有一个对应的`IntersectionObserverEntry`对象(entries里的元素)。这个对象包含了以下属性：
+
+- target：被观察的元素。
+- boundingClientRect：被观察元素的矩形区域的信息，包括位置、尺寸等。
+- intersectionRect：被观察元素与视窗的交叉区域的信息，包括位置、尺寸等。
+- intersectionRatio：被观察元素与视窗的交叉比例，取值范围为0到1，表示元素的多少部分在视窗中可见。
+- isIntersecting：表示被观察元素是否与视窗相交，取值为true或false。
+
+:::
+
+配置对象里面可以设置
+
+`{
+root: null, // 默认为视窗
+rootMargin: '0px', // 边距
+threshold: 1.0 // 阈值
+}`
+
+在上面的示例中，root设置为null表示默认为视窗，rootMargin设置为'0px'表示边距为0(默认也是0)，
+threshold设置为1.0（默认为0）表示当目标元素全部进入视窗时触发回调函数。
+
+:::tip
+rootMargin 的作用
+计算交叉时添加到根边界盒 (en-US)的矩形偏移量，可以有效的缩小或扩大根的判定范围从而满足计算需要。
+:::
+
+
+### 4.2 示例
+
+监听多个元素
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IntersectionObserver Example</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: #ccc;
+      margin: 1000px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <script>
+    const box = document.querySelector('.box');
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        box.textContent = 'Hello World!';
+      }
+    }, {
+      root: null, // 默认为视窗
+      rootMargin: '0px', // 边距
+      threshold: 1.0 // 阈值
+    });
+    observer.observe(box);
+  </script>
+</body>
+</html>
+```
+
+### 4.3 补充
+
+:::tip
+在使用`IntersectionObserver`时，记得对其进行销毁处理，以避免在组件卸载后产生不必要的触发和内存泄漏。
+
+在组件卸载时调用对应的方法 `IntersectionObserver.disconnect()` 使得对象停止监听
+
+针对已经出现在视口的元素，可以使用 `IntersectionObserver.unobserve(element)`的方式使得对象停止对该元素监听
+:::
 ## 五、应用
 
 ### 5.1 图片懒加载
+
+以前的方式是监听滚动事件和结合元素的`getBoundingClientRect()`方法和`Window.innerHeight`来判断是否出现在视口。
+（`top>0 && top<window.innerHeight`）。这种方法还需要考虑节流来避免大量的浏览器计算
+
+在这里主要是讲解新方法,使用`IntersectionObserver`实现图片懒加载，即在图片进入视窗时再加载图片，从而减少页面的加载时间和网络请求
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IntersectionObserver Example</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: #ccc;
+      margin: 1000px 0;
+    }
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <img class="image" src="loading.gif" data-src="image.jpg">
+  <div class="box"></div>
+  <img class="image" src="loading.gif" data-src="image2.jpg">
+  <div class="box"></div>
+  <img class="image" src="loading.gif" data-src="image3.jpg">
+  <div class="box"></div>
+  <script>
+    const images = document.querySelectorAll('image');
+    const intersectionObserver = new IntersectionObserver((entries)=>{
+          // 为每一个监听的元素设置事件
+        entries.forEach((entry)=>{
+            if(entry.isIntersecting){
+                // entry.target 获得目标HtmlElment
+                let src = entry.target.getAttribute('data-src');
+                entry.target.setAttribute('src',src);
+                // 出现过的图片便取消监听
+                intersectionObserver.unobserve(entry.target);
+            }
+        })
+    })
+      // 给 intersectionObserver 添加需要监听的元素
+      images.forEach((image)=>{
+          intersectionObserver.observe(image);
+      })
+  </script>
+</body>
+</html>
+```
+
+
+### 5.2 列表触底加载数据
+
+这里使用react来实现，主要思路就是在列表底部放一个元素用来监听，如果这个元素出现在了视口，那么就更新数据
+
+```jsx
+import React, { useState, useEffect, useRef } from 'react';
+
+function List() {
+  const [items, setItems] = useState([]);
+  const [page, setPage] = useState(1);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    fetch(`api?page=${page}`)
+      .then(response => response.json())
+      .then(data => setItems(prevItems => [...prevItems, ...data]));
+  }, [page]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        setPage(prevPage => prevPage + 1);
+      }
+    }, { threshold: 1 });
+    observer.observe(bottomRef.current);
+    // 当组件卸载时进行销毁，以免内存泄漏
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div>
+      {items.map(item => (
+        <div key={item.id}>{item.title}</div>
+      ))}
+      <div ref={bottomRef}></div>
+    </div>
+  );
+}
+```
