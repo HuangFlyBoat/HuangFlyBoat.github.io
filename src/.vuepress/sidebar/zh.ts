@@ -52,12 +52,13 @@ export const zhSidebar = sidebar({
       link: "Animation/",
       children: "structure",
     },
+    "intro",
+  ],
+  "/zh/posts/":[
     {
       text: "文章",
       icon: "note",
-      prefix: "posts/",
       children: "structure",
     },
-    "intro",
-  ],
+  ]
 });

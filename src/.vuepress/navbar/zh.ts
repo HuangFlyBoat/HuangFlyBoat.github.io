@@ -9,11 +9,11 @@ export const zhNavbar = navbar([
     prefix: "/zh/posts/",
     children: [
       {
-        text: "暂时没想法",
+        text: "笔记",
         icon: "edit",
-        prefix: "nothing/",
+        prefix: "note/",
         children: [
-          { text: "1", icon: "edit", link: "1" },
+          { text: "日语笔记", icon: "edit", link: "Japanese" },
         ],
       }
     ],
