@@ -23,13 +23,11 @@ sticky: true
 star: true
 # 你可以自定义页脚
 footer: 夏天刚刚开始呢
-
 ---
 
 正则表达式，小白向~
 
 <!-- more -->
-
 
 # 正则表达式，新手向
 
@@ -65,6 +63,10 @@ console.log(str.replace(/$/, '*')); // a 123 bP*
 console.log(str.replace(/^a 12/, '*')); // *3 bP
 console.log(str.replace(/$x/, '*')); // a 123 bP
 ```
+
+:::tip
+^ 也有取反的意思哦，注意区分。比如 `^/d ^/w` 等，文章最后有举例
+:::
 
 #### 3. \b 匹配一个词的边界
 
@@ -104,8 +106,6 @@ js 正则表达式引擎规定的 \b 匹配逻辑如下：
 > Return true
 
 63 个字符和运算逻辑
-
-
 
 #### 4. \B 则和 \b 相反，是对非词的边界进行匹配
 
@@ -278,4 +278,159 @@ console.log(str.replace(/<.*?>/), '*'); // * <bar> new </bar> </foo>
 let str2 = `console.log() asf let x = 5 console.error(;asf)`;
 console.log(str2.replace(/console\.\w{3,5}\(.*?\)/g, '*'));
 // * asf let x = 5 *
+```
+
+## 三、正则常用函数
+
+### 3.1 `RegExp.prototype.test(str)`
+
+test() 方法执行一个检索，用来查看正则表达式与指定的字符串是否匹配。返回 true 或 false
+
+注意全局匹配(有 g)和不是非全局匹配的 lastIndex 区别
+
+```js
+const str = 'table football';
+
+const regex = new RegExp('foo*');
+const globalRegex = new RegExp('foo*', 'g');
+
+console.log(regex.test(str));
+// Expected output: true
+
+console.log(globalRegex.lastIndex);
+// Expected output: 0
+
+console.log(globalRegex.test(str));
+// Expected output: true
+
+console.log(globalRegex.lastIndex);
+// Expected output: 9
+
+console.log(globalRegex.test(str));
+// Expected output: false
+```
+
+::: tip
+在实际应用中，确定位数的情况下应该避免使用全局匹配(g)和粘性匹配(y)
+
+因为一旦加上后，正则会记录上次匹配成功的索引 lastIndex（从 1 开始），下次匹配时会从 lastIndex 后开始匹配
+
+而用户输入是一个动态过程，一直在变化值，如果从 lastIndex 开始匹配会导致匹配结果和实际想要的效果不一致
+:::
+
+### 3.2 `RegExp.prototype.exec(str)`
+
+exec() 方法在一个指定字符串中执行一个搜索匹配。返回一个结果数组或 null
+
+如果匹配失败，exec() 方法返回 null，并将正则表达式的 lastIndex 重置为 0
+
+匹配成功，数组的第一个元素是整个匹配结果，接下来的元素是与括号捕获组中的模式匹配的子字符串。
+
+```js
+const reg = new RegExp(/tat/g);
+let str = 'Neither tar nor tab. tat is tat';
+console.log(reg.exec(str));
+console.log(reg.exec(str));
+console.log(reg.exec(str));
+/**
+[
+  'tat',
+  index: 21,
+  input: 'Neither tar nor tab. tat is tat',
+  groups: undefined
+]
+[
+  'tat',
+  index: 28,
+  input: 'Neither tar nor tab. tat is tat',
+  groups: undefined
+]
+null
+ */
+```
+
+```js
+const regex = /(\w+)\s(\w+)/;
+const str = 'Hello World';
+const result = regex.exec(str);
+console.log(result);
+/**
+[
+  'Hello World',
+  'Hello',
+  'World',
+  index: 0,
+  input: 'Hello World',
+  groups: undefined
+]
+ */
+```
+
+### 3.1 `String.prototype.match(RegExp)`
+
+match() 方法检索字符串与正则表达式进行匹配的结果，没有匹配的则返回 null
+
+> 只接受一个参数 `match(regexp)`
+
+> 返回值一个 Array，其内容取决于是否存在全局（g）标志，如果没有匹配，则返回 **null**。
+>
+> - 如果使用 g 标志，则将返回与完整正则表达式匹配的所有结果，但不会返回捕获组。
+>
+> - 如果没有使用 g 标志，则只返回第一个完整匹配及其相关捕获组。在这种情况下，match() 方法将返回与 RegExp.prototype.exec() 相同的结果（一个带有一些额外属性的数组）。
+
+```js
+const paragraph = 'The quick brown fox jumps over the lazy dog. It barked.';
+const regex = /[A-Z]/g;
+const found = paragraph.match(regex);
+// ["T", "I"]  正则表达式有 g 的情况下
+// ["T"]  正则表达式没有 g 的情况下
+```
+
+### 3.3 `String.prototype.replace()`
+
+用得比较多的方法了，相较于其他几个方法，具有更多的参数选择。
+
+> replace(pattern, replacement)
+>
+> - pattern 可以是字符串或者一个带有 Symbol.replace 方法的对象，典型的例子就是正则表达式。任何没有 Symbol.replace 方法的值都会被强制转换为字符串。
+> - replacement 可以是字符串或函数。如果是字符串，它将替换由 pattern 匹配的子字符串。函数下面重点介绍
+
+::: warning
+值得注意的是，如果 pattern 是一个空字符串，则替换项将被插入到字符串的开头
+
+```js
+'xxx'.replace('', '_');
+// "_xxx"
+```
+
+字符串模式只会被替换一次。要执行全局搜索和替换，请使用带有 g 标志的正则表达式或使用 replaceAll()
+:::
+
+在第二个参数里面还可以传入特殊的字符，这里就不过多赘述，感兴趣可以查阅 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+
+```js
+// 例如 $ + 数字 表示匹配的子项，数字序号从1开始
+const re = /(\w+)\s(\w+)/;
+const str = 'Maria Cruz';
+const newstr = str.replace(re, '$2, $1');
+console.log(newstr); // Cruz, Maria
+```
+
+**replacement 为函数的情况**
+
+当替换值为函数时，函数会接收一些参数，提供有关匹配的信息，以便动态生成替换字符串。函数的参数如下：
+
+- match：匹配到的字符串。
+- p1, p2, ..., pn：如果模式中有括号捕获组，这些参数会接收括号捕获组匹配的字符串。
+- offset：匹配到的字符串在原始字符串中的偏移量。
+- string：原始字符串。
+
+```js
+function replacer(match, p1, p2, p3, offset, string) {
+  // p1 是非数字，p2 是数字，且 p3 非字母数字
+  return [p1, p2, p3].join(' - ');
+}
+// ^ 在这里是取反的意思，不是以什么开头的意思哦
+const newString = 'abc12345#$*%'.replace(/([^\d]*)(\d*)([^\w]*)/, replacer);
+console.log(newString); // abc - 12345 - #$*%
 ```
