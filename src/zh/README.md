@@ -19,6 +19,11 @@ projects:
     desc: React 进阶
     link: /zh/React/
 
+  - icon: vue
+    name: Vue
+    desc: Vue 进阶
+    link: /zh/Vue/
+
   - icon: emmet
     name: JS数据结构
     desc: JavaScript数据结构与算法
@@ -44,6 +49,5 @@ projects:
     desc: 喂喂，已经不止一次被问到过动画了！
     link: /zh/Animation/
 
-    
 footer: 安静下来，去做自己该做的事
 ---
