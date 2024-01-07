@@ -44,10 +44,10 @@ projects:
     desc: 一切困惑我的知识都将在此受到制裁(＾－＾)V
     link: /zh/CrushingZone/
 
-  - icon: animation
-    name: 动画方面
-    desc: 喂喂，已经不止一次被问到过动画了！
-    link: /zh/Animation/
+  - icon: cache
+    name: 服务器
+    desc: 前端可不能只会敲页面啊！
+    link: /zh/Server/
 
 footer: 安静下来，去做自己该做的事
 ---
