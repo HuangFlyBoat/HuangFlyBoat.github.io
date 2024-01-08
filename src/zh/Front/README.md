@@ -13,3 +13,4 @@ category:
 - [浏览器](browser.md)
 - [Webpack](webpack.md)
 - [Vite](vite.md)
+- [动画](animation.md)
