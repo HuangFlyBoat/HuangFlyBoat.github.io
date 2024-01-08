@@ -45,10 +45,10 @@ export const zhSidebar = sidebar({
       children: 'structure',
     },
     {
-      text: '动画方面',
-      icon: 'animation',
-      prefix: 'Animation/',
-      link: '/zh/Animation/',
+      text: '服务器方面',
+      icon: 'cache',
+      prefix: 'Server/',
+      link: '/zh/Server/',
       children: 'structure',
     },
     'intro',
@@ -103,11 +103,11 @@ export const zhSidebar = sidebar({
       children: 'structure',
     },
   ],
-  '/zh/Animation/': [
+  '/zh/Server/': [
     {
-      text: '动画方面',
-      link: '/zh/Animation/',
-      icon: 'emmet',
+      text: '服务器',
+      link: '/zh/Server/',
+      icon: 'cache',
       children: 'structure',
     },
   ],

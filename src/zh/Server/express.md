@@ -1,3 +1,19 @@
+---
+title: Express
+icon: page
+order: 1
+author: HCX
+date: 2024-01-05
+category:
+  - Node
+  - Server
+tag:
+  - Server
+sticky: true
+star: true
+footer: fly fly fly ~
+---
+
 # Express
 
 ## 一、基础
@@ -100,7 +116,7 @@ PATH 可以大致分为以下 4 种:（以下统一用 get 方法演示了）
   });
   ```
 
-::: important
+::: info
 这里的 path 规则同样适用于其他地方，比如中间件里的 path
 
 需要注意的是，path 的匹配并不是精准匹配，匹配规则是根据开头来匹配的。
