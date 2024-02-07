@@ -296,8 +296,15 @@ fs.rmdir('./a', { recursive: true }, (err) => {});
 
 ### 2.2 Http 请求
 
+### 2.3 模块化 daemon 守护进程
+
 ## 三、模块化与包管理
 
 ## 四、Node 后台相关框架
 
-### 2.3 模块化
+
+## 五、补充
+
+### node-schedule 定时任务
+
+### pm2 管理进程

@@ -7,3 +7,5 @@ category:
 ---
 
 ## 目录
+
+- [Pinia](pinia.md)

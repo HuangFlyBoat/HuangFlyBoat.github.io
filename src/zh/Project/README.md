@@ -1,5 +1,5 @@
 ---
-title: 项目自用封装
+title: 项目搭建
 index: false
 icon: api
 category:
@@ -10,4 +10,5 @@ category:
 
 - [VSCode 配置](vscode.md)
 - [Mobx](mobx.md)
+- [Mongoose](mongoose.md)
 - [ESLint](eslint.md)
