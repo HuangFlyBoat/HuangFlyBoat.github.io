@@ -9,6 +9,7 @@ category:
 ## 目录
 
 - [Linux](linux.md)
+- [Nginx](nginx.md)
 - [Node](node.md)
 - [Express](express.md)
 - [Koa](koa.md)
