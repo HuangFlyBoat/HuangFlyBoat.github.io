@@ -8,4 +8,5 @@ category:
 
 ## 目录
 
+- [Vue](vue.md)
 - [Pinia](pinia.md)

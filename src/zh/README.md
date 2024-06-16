@@ -35,8 +35,8 @@ projects:
     link: /zh/Project/
 
   - icon: leaf
-    name: 前端设计模式
-    desc: 设计模式这么好玩，真的不来看看吗？
+    name: 前端工程化
+    desc: 从团队效率出发，不再是一个人
     link: /zh/DesignPattern/
 
   - icon: article

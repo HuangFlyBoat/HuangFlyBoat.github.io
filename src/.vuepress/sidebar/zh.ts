@@ -17,6 +17,13 @@ export const zhSidebar = sidebar({
       children: 'structure',
     },
     {
+      text: 'Vue',
+      icon: 'vue',
+      prefix: 'Vue/',
+      link: '/zh/Vue/',
+      children: 'structure',
+    },
+    {
       text: 'React',
       icon: 'react',
       prefix: 'React/',
@@ -38,7 +45,7 @@ export const zhSidebar = sidebar({
       children: 'structure',
     },
     {
-      text: '前端设计模式',
+      text: '前端工程化',
       icon: 'leaf',
       prefix: 'DesignPattern/',
       link: '/zh/DesignPattern/',
@@ -79,6 +86,14 @@ export const zhSidebar = sidebar({
       children: 'structure',
     },
   ],
+  '/zh/Vue/': [
+    {
+      text: 'Vue',
+      link: '/zh/Vue/',
+      icon: 'vue',
+      children: 'structure',
+    },
+  ],
   '/zh/DataStructure/': [
     {
       text: 'JS数据结构',
@@ -97,7 +112,7 @@ export const zhSidebar = sidebar({
   ],
   '/zh/DesignPattern/': [
     {
-      text: '前端设计模式',
+      text: '前端工程化',
       link: '/zh/DesignPattern/',
       icon: 'emmet',
       children: 'structure',
