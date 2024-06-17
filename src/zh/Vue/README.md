@@ -9,4 +9,5 @@ category:
 ## 目录
 
 - [Vue](vue.md)
+- [Vue-router](vue-router.md)
 - [Pinia](pinia.md)
