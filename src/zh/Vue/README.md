@@ -10,4 +10,5 @@ category:
 
 - [Vue](vue.md)
 - [Vue-router](vue-router.md)
+- [Vuex](vuex.md)
 - [Pinia](pinia.md)
