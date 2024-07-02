@@ -868,3 +868,17 @@ const MessagePlugin = function (app) {
   };
 };
 ```
+
+## 补充
+
+### Vue3 与 Vue2 的区别
+
+1. 生成 Vue 实例的方式
+
+2. 组件里 this 指向
+
+3. Composition Api 组合式
+
+4.
+
+###
